@@ -112,7 +112,7 @@ export default function Navbar() {
             "
                     >
                         <Link
-                            href="#"
+                            href="/auth/signin"
                             className="
                 rounded-lg
                 px-5
@@ -128,8 +128,9 @@ export default function Navbar() {
                             Sign In
                         </Link>
 
-                        <button
-                            className="
+                        <Link href={"/auth/signup"}>
+                            <button
+                                className="
                 rounded-lg
                 bg-violet-600
                 px-5
@@ -140,9 +141,10 @@ export default function Navbar() {
                 transition
                 hover:bg-violet-500
               "
-                        >
-                            Get Started
-                        </button>
+                            >
+                                Get Started
+                            </button>
+                        </Link>
                     </div>
                 </div>
 
@@ -207,7 +209,7 @@ export default function Navbar() {
                     {/* MOBILE BUTTONS */}
                     <div className="flex flex-col gap-3 border-t border-white/10 pt-5">
                         <Link
-                            href="#"
+                            href="/auth/signin"
                             className="
                 rounded-xl
                 bg-white/5
@@ -220,9 +222,9 @@ export default function Navbar() {
                         >
                             Sign In
                         </Link>
-
-                        <button
-                            className="
+                        <Link href="/auth/signup">
+                            <button
+                                className="
                 rounded-xl
                 bg-violet-600
                 py-3
@@ -231,9 +233,10 @@ export default function Navbar() {
                 transition
                 hover:bg-violet-500
               "
-                        >
-                            Get Started
-                        </button>
+                            >
+                                Get Started
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
