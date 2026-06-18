@@ -7,6 +7,8 @@ import {
     Bars,
     Xmark,
 } from "@gravity-ui/icons";
+import { signOut, useSession } from "@/lib/auth-client";
+import { Button } from "@heroui/react";
 
 const navLinks = [
     {
@@ -25,6 +27,11 @@ const navLinks = [
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const handleLogOut = async () => {
+        await signOut();
+    }
+    const { data, isPending } = useSession();
+    const user = data?.user;
 
     return (
         <header className="w-full bg-[#111111] px-4 py-4 sm:px-6 lg:px-8">
@@ -99,7 +106,10 @@ export default function Navbar() {
                     <div className="mx-5 h-10 w-px bg-white/10" />
 
                     {/* BUTTON GROUP */}
-                    <div
+                    {user ? <div className="flex items-center gap-2">
+                        <p>Welcome, {user.name}</p>
+                        <Button onClick={handleLogOut} variant="ghost">SignOut</Button>
+                    </div> : <div
                         className="
               flex
               items-center
@@ -145,7 +155,8 @@ export default function Navbar() {
                                 Get Started
                             </button>
                         </Link>
-                    </div>
+                    </div>}
+
                 </div>
 
                 {/* MOBILE MENU BUTTON */}
@@ -207,7 +218,10 @@ export default function Navbar() {
                     </div>
 
                     {/* MOBILE BUTTONS */}
-                    <div className="flex flex-col gap-3 border-t border-white/10 pt-5">
+                    {user ? <div className="space-y-3">
+                        <p>Welcome, {user.name}</p>
+                        <Button onClick={handleLogOut} variant="outline" className="w-full">SignOut</Button>
+                    </div> : <div className="flex flex-col gap-3 border-t border-white/10 pt-5">
                         <Link
                             href="/auth/signin"
                             className="
@@ -237,7 +251,8 @@ export default function Navbar() {
                                 Get Started
                             </button>
                         </Link>
-                    </div>
+                    </div>}
+
                 </div>
             </div>
         </header>
