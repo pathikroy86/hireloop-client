@@ -5,20 +5,22 @@ import { ArrowRight, Check, Envelope, Lock, Person } from "@gravity-ui/icons";
 import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { Radio, RadioGroup } from "@heroui/react";
 
 export default function SignupPage() {
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const user = Object.fromEntries(formData.entries())
+        console.log(user)
 
         const { data, error } = await authClient.signUp.email({
             name: user.name,
             email: user.email,
             password: user.password,
+            role: user.role,
             callbackURL: "/",
         })
-        console.log(data)
 
         if (!error) {
             toast.success("Registered Successfully");
@@ -299,6 +301,31 @@ export default function SignupPage() {
         `,
                             }}
                         />
+                    </div>
+
+                    {/* Role auth */}
+                    <div className="flex flex-col gap-4">
+                        <Label>Select Role</Label>
+                        <RadioGroup defaultValue="seeker" name="role" orientation="horizontal">
+                            <Radio value="seeker">
+                                <Radio.Content>
+                                    <Radio.Control>
+                                        <Radio.Indicator />
+                                    </Radio.Control>
+                                    Job Seeker
+                                </Radio.Content>
+                                <Description></Description>
+                            </Radio>
+                            <Radio value="recruiter">
+                                <Radio.Content>
+                                    <Radio.Control>
+                                        <Radio.Indicator />
+                                    </Radio.Control>
+                                    Recruiter
+                                </Radio.Content>
+                                <Description></Description>
+                            </Radio>
+                        </RadioGroup>
                     </div>
 
                     {/* TERMS */}
