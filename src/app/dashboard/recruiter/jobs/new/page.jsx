@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Form,
     TextField,
@@ -13,21 +13,39 @@ import {
     CardContent,
     CardFooter,
     Button,
+    Switch,
     Input
 } from '@heroui/react';
 import {
     Xmark
 } from '@gravity-ui/icons';
+import { createJobs } from '@/lib/actions/jobs';
+import toast from 'react-hot-toast';
+import { redirect } from 'next/navigation';
 
 export default function PostJobPage() {
+    const [isRemote, setIsRemote] = useState(false);
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData.entries());
 
-        console.log("Submitted Job Data Payload:", data);
+        // Add remote toggle value manually to the form payload data
+        data.isRemote = isRemote;
+        const payload = {
+            ...data,
+            isRemote,
+            status: "active",
+            companyId: "company11"
+        }
+        const res = await createJobs(payload);
+        if (res.insertedId) {
+            toast.success("Inserted Successfully!");
+            e.target.reset();
+            redirect('/dashboard/recuiter/jobs');
+        }
     };
 
     return (
@@ -182,15 +200,35 @@ export default function PostJobPage() {
                             </div>
                         </div>
 
-                        {/* --- LOCATION --- */}
+                        {/* --- REMOTE STATE SWITCH (HeroUI v3 Anatomy Syntax) --- */}
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-medium text-neutral-400">Location</label>
+                            <label className="text-xs font-medium text-neutral-400">Workplace Setting</label>
+                            <Switch
+                                isSelected={isRemote}
+                                onChange={setIsRemote}
+                                name="isRemoteJob"
+                            >
+                                <Switch.Content>
+                                    <Switch.Control>
+                                        <Switch.Thumb />
+                                    </Switch.Control>
+                                    <span className="text-sm text-white font-normal">Remote Job Position</span>
+                                </Switch.Content>
+                            </Switch>
+                        </div>
+
+                        {/* --- LOCATION FIELD --- */}
+                        <div className="flex flex-col gap-1.5">
+                            <label className={`text-xs font-medium transition-colors ${isRemote ? 'text-neutral-600' : 'text-neutral-400'}`}>
+                                Location {isRemote && "(Disabled for Remote Roles)"}
+                            </label>
                             <Input
                                 name="location"
                                 placeholder="e.g. San Francisco, CA"
-                                isRequired
-                                errorMessage="Location is required"
-                                className="w-full"
+                                disabled={isRemote}
+                                isRequired={!isRemote}
+                                errorMessage="Location is required for non-remote roles"
+                                className={`w-full transition-opacity duration-200 ${isRemote ? 'opacity-60 cursor-not-allowed' : ''}`}
                             />
                         </div>
 
