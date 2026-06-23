@@ -1,5 +1,6 @@
+const dns = require("node:dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 import React from 'react';
-import RecruiterDashboard from './recruiter/page';
 import DashboardSidebar from '@/components/dashboard/DashboardSidebar';
 
 const DashboardLayout = ({ children }) => {

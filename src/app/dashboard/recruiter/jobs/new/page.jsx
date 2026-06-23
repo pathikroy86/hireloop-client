@@ -89,6 +89,7 @@ export default function PostJobPage() {
                                 <label className="text-xs font-medium text-neutral-400">Job Category</label>
                                 <Select
                                     name="jobCategory"
+                                    aria-label="Job category"
                                     placeholder="Select Category"
                                     isRequired
                                     errorMessage="Job Category is required"
@@ -114,6 +115,7 @@ export default function PostJobPage() {
                                 <label className="text-xs font-medium text-neutral-400">Job Type</label>
                                 <Select
                                     name="jobType"
+                                    aria-label="Job type"
                                     placeholder="Select Employment Type"
                                     isRequired
                                     errorMessage="Job Type is required"
@@ -155,6 +157,7 @@ export default function PostJobPage() {
                                 <label className="text-xs font-medium text-neutral-400">Currency</label>
                                 <Select
                                     name="currency"
+                                    aria-label="Salary currency"
                                     placeholder="Currency"
                                     defaultValue="USD"
                                     className="w-full"

@@ -45,8 +45,8 @@ export default function SigninPage() {
           absolute
           left-1/2
           top-1/2
-          h-[500px]
-          w-[500px]
+          h-125
+          w-125
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
@@ -60,8 +60,8 @@ export default function SigninPage() {
           absolute
           inset-0
           opacity-[0.04]
-          [background-image:radial-gradient(circle_at_center,white_1px,transparent_1px)]
-          [background-size:30px_30px]
+          bg-[radial-gradient(circle_at_center,white_1px,transparent_1px)]
+          bg-size-[30px_30px]
         "
             />
             {/* CARD */}
@@ -281,7 +281,7 @@ export default function SigninPage() {
             text-gray-400
           "
                 >
-                    Don't have an account?{" "}
+                    Don&apos;t have an account?{" "}
                     <Link
                         href="/auth/signup"
                         className="
