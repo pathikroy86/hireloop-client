@@ -1,4 +1,13 @@
+import { serverFetch } from "@/lib/core/server";
 import { getApiBaseUrl } from "./base-url";
+
+export const getJobs = async () => {
+    return serverFetch('/api/jobs');
+}
+
+export const getJobsbyId = async (id) => {
+    return serverFetch(`/api/jobs/${id}`);
+}
 
 export const getCompanyJobs = async (companyId, status = "active") => {
     const params = new URLSearchParams({

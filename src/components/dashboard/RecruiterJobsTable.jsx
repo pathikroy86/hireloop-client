@@ -2,9 +2,11 @@ import React from 'react';
 import { Table, Chip, Button, Tooltip } from "@heroui/react";
 import { Eye, Edit2, Trash2 } from "lucide-react";
 import { getCompanyJobs } from '@/lib/actions/api/jobs';
+import { getLoggedInRecruiterCompany, getRecruiterCompany } from '@/lib/actions/api/companies';
 
 const RecruiterJobsTable = async () => {
-    const companyId = 'company11';
+    const company = await getLoggedInRecruiterCompany();
+    const companyId = company?._id;
     const jobs = await getCompanyJobs(companyId) || [];
 
     const getStatusColor = (status) => {

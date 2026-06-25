@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from '@heroui/react';
 import { Store } from 'lucide-react';
 
-export default function MyCompanyEmptyState() {
+export default function NoCompany() {
     return (
         <div className="min-h-screen bg-[#0f0f11] text-white flex flex-col justify-between p-6 select-none font-sans">
 

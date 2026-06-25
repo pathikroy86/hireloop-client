@@ -144,10 +144,9 @@ export default function RegisterCompanyForm() {
                                 <Input
                                     name="companyName"
                                     placeholder="e.g. Acme Corp"
-                                    isRequired
-                                    errorMessage="Company Name is required"
+                                    required
                                     className="w-full"
-                                    isDisabled={isSubmitting}
+                                    disabled={isSubmitting}
                                 />
                             </div>
 
@@ -157,10 +156,9 @@ export default function RegisterCompanyForm() {
                                     name="industryCategory"
                                     aria-label="Industry or category"
                                     placeholder="Technology"
-                                    isRequired
-                                    errorMessage="Please select an industry sector"
+                                    required
                                     className="w-full"
-                                    isDisabled={isSubmitting}
+                                    disabled={isSubmitting}
                                 >
                                     <Select.Trigger>
                                         <Select.Value />
@@ -224,10 +222,9 @@ export default function RegisterCompanyForm() {
                                     name="employeeCount"
                                     aria-label="Employee count range"
                                     placeholder="1-10 employees"
-                                    isRequired
-                                    errorMessage="Employee size metrics are required"
+                                    required
                                     className="w-full"
-                                    isDisabled={isSubmitting}
+                                    disabled={isSubmitting}
                                 >
                                     <Select.Trigger>
                                         <Select.Value />
@@ -275,10 +272,9 @@ export default function RegisterCompanyForm() {
                                 name="shortDescription"
                                 placeholder="Tell us about your company's mission and culture..."
                                 rows={4}
-                                isRequired
-                                errorMessage="A brief introductory overview is required"
+                                required
                                 className="w-full"
-                                isDisabled={isSubmitting}
+                                disabled={isSubmitting}
                             />
                         </div>
 
@@ -289,7 +285,7 @@ export default function RegisterCompanyForm() {
                             type="button"
                             variant="bordered"
                             className="border-neutral-700 text-white hover:bg-neutral-800 font-medium px-5"
-                            isDisabled={isSubmitting}
+                            disabled={isSubmitting}
                         >
                             Cancel
                         </Button>

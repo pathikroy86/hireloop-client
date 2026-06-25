@@ -13,11 +13,11 @@ import { Button } from "@heroui/react";
 const navLinks = [
     {
         name: "Browse Jobs",
-        href: "#",
+        href: "/jobs",
     },
     {
         name: "Company",
-        href: "#",
+        href: "/companies",
     },
     {
         name: "Pricing",
