@@ -21,7 +21,7 @@ const navLinks = [
     },
     {
         name: "Pricing",
-        href: "#",
+        href: "/plans",
     },
 ];
 

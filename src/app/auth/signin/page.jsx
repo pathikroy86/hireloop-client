@@ -4,9 +4,13 @@ import { authClient } from "@/lib/auth-client";
 import { ArrowRight, Check, Envelope, Lock, Person } from "@gravity-ui/icons";
 import { Button, Card, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function SigninPage() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const redirectTo = searchParams.get("redirect") || '/';
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -15,12 +19,12 @@ export default function SigninPage() {
         const { data, error } = await authClient.signIn.email({
             email: user.email,
             password: user.password,
-            callbackURL: "/",
         })
         console.log(data)
 
         if (!error) {
-            toast.success("Registered Successfully");
+            toast.success("Logged In Successfully");
+            router.push(redirectTo);
         } else {
             toast.error("Email and Password doesn't match");
         }
@@ -283,7 +287,7 @@ export default function SigninPage() {
                 >
                     Don&apos;t have an account?{" "}
                     <Link
-                        href="/auth/signup"
+                        href={`/auth/signup?redirect=${redirectTo}`}
                         className="
               font-medium
               text-violet-400

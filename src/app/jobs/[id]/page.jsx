@@ -89,9 +89,9 @@ const JobDetailsPage = async ({ params }) => {
                                 </div>
                             </div>
 
-                            <Button className="w-full sm:w-auto bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all rounded-xl h-11 px-6 shadow-sm">
+                            <Link href={`/jobs/${id}/apply`} className="flex items-center w-full sm:w-auto bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-all rounded-xl h-11 px-6 shadow-sm">
                                 Apply for this position
-                            </Button>
+                            </Link>
                         </Card.Footer>
                     </div>
 

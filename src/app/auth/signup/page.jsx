@@ -6,24 +6,32 @@ import { Button, Card, Description, FieldError, Form, Input, Label, TextField } 
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { Radio, RadioGroup } from "@heroui/react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignupPage() {
+    const searchParams = useSearchParams();
+    const redirectTo = searchParams.get("redirect") || '/';
+    const router = useRouter();
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const user = Object.fromEntries(formData.entries())
         console.log(user)
 
+        const plan = user.role === 'seeker' ? 'seeker_free' : 'recruiter_free'
+
         const { data, error } = await authClient.signUp.email({
             name: user.name,
             email: user.email,
             password: user.password,
             role: user.role,
-            callbackURL: "/",
+            plan: plan,
         })
 
         if (!error) {
             toast.success("Registered Successfully");
+            router.push(redirectTo)
+
         } else {
             toast.error("Please provide valid information");
         }
@@ -427,7 +435,7 @@ export default function SignupPage() {
                 >
                     Already have an account?{" "}
                     <Link
-                        href="/auth/signin"
+                        href={`/auth/signin?redirect=${redirectTo}`}
                         className="
               font-medium
               text-violet-400

@@ -22,10 +22,11 @@ export const serverMutation = async (path, data) => {
         body: JSON.stringify(data),
     });
 
+    const text = await res.text();
+
     if (!res.ok) {
-        throw new Error(`Request failed: ${res.status}`);
+        throw new Error(`Request failed: ${res.status}${text ? ` - ${text}` : ""}`);
     }
 
-    const text = await res.text();
     return text ? JSON.parse(text) : null;
 }
